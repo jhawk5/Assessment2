@@ -7,6 +7,8 @@
 #include "mmu.h"
 #include "proc.h"
 
+int consnum = 0;
+
 int sys_fork(void) {
     return fork();
 }
@@ -67,6 +69,11 @@ int sys_sleep(void) {
     return 0;
 }
 
+int sys_screen(void) {
+    consnum = consnum + 1;
+    return consnum;
+}
+
 // return how many clock tick interrupts have occurred
 // since start.
 int sys_uptime(void) {
@@ -76,4 +83,9 @@ int sys_uptime(void) {
     xticks = ticks;
     release(&tickslock);
     return xticks;
+}
+
+int sys_clrscr(void) {
+    cprintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    return 0;
 }
